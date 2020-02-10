@@ -20,9 +20,9 @@ class TasksController extends Controller
     {
         $allTasks = $task->whereIn('user_id', $request->user())->with('user');
         $tasks = $allTasks->orderBy('created_at', 'desc')->take(20)->get();
-        
+
         return response()->json([
-            'tasks' => $tasks,
+            'tasks' => $tasks
 
         ]);
     }

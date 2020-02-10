@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +11,7 @@ class App extends Component {
         };
         // bind
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     // handle change
     handleChange(e) {
@@ -17,6 +19,14 @@ class App extends Component {
             name: e.target.value
         });
         // Console.log(e.target.value);
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        axios.post('/tasks', {
+            name: this.state.name
+        }).then(response => {
+            console.log('from handle submit', response);
+        });
     }
     render() {
         return (
@@ -26,7 +36,7 @@ class App extends Component {
                         <div className="card">
                             <div className="card-header">React Component</div>
                                 <div className="card-body">
-                                    <form>
+                                    <form onSubmit={this.handleSubmit}>
                                         <div className="form-group">
                                             <textarea 
                                                 onChange={this.handleChange}
