@@ -46,6 +46,14 @@ class App extends Component {
         ));
     }
 
+    getTasks() {
+        axios.get('/tasks').then(response => console.log(response));
+    }
+    // Lifecycle method
+    componentWillMount() {
+        this.getTasks();
+    }
+
     render() {
         return (
             <div className="container">
