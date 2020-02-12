@@ -68997,6 +68997,7 @@ function (_Component) {
 
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.renderTasks = _this.renderTasks.bind(_assertThisInitialized(_this));
     return _this;
   } // handle change
 
@@ -69022,6 +69023,19 @@ function (_Component) {
           tasks: [response.data].concat(_toConsumableArray(_this2.state.tasks)),
           name: ''
         });
+      });
+    } // render tasks
+
+  }, {
+    key: "renderTasks",
+    value: function renderTasks() {
+      return this.state.tasks.map(function (task) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: task.id,
+          className: "media"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "media-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name)));
       });
     }
   }, {
@@ -69054,7 +69068,7 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn  btn-primary"
-      }, "Create Task"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Create Task")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.renderTasks()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, "I'm an example component!")))));
     }
