@@ -54,9 +54,12 @@ class App extends Component {
     }
 
     getTasks() {
-        axios.get('/tasks').then(response => this.setState({
-            tasks: [...response.data.tasks]
-        }));
+            axios.get('/tasks').then(response => this.setState({
+                tasks: [...response.data.tasks]
+
+            // axios.get('/tasks').then(response => console.log(response));
+            })
+        );
     }
     // Lifecycle method
     componentWillMount() {
@@ -87,8 +90,7 @@ class App extends Component {
                                                 value={this.state.name}
                                                 className="form-control" 
                                                 rows="5" 
-                                                maxLength="255"
-                                                placeholder="Create a new task" 
+                                                maxLength="255"placeholder="Create a new task" 
                                                 required
                                             />
                                         </div>
