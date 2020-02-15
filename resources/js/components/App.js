@@ -10,10 +10,13 @@ class App extends Component {
             tasks: []
         };
         // bind
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderTasks = this.renderTasks.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.getTasks = this.getTasks.bind(this);
+
     }
     // handle change
     handleChange(e) {
@@ -56,11 +59,9 @@ class App extends Component {
     getTasks() {
             axios.get('/tasks').then(response => this.setState({
                 tasks: [...response.data.tasks]
-
-            // axios.get('/tasks').then(response => console.log(response));
-            })
-        );
-    }
+                        })
+                    );
+                }
     // Lifecycle method
     componentWillMount() {
         this.getTasks();
@@ -94,7 +95,10 @@ class App extends Component {
                                                 required
                                             />
                                         </div>
-                                        <button type="submit" className="btn  btn-primary">Create Task</button>
+                                        <button 
+                                            type="submit" 
+                                            className="btn  btn-primary">Create Task
+                                        </button>
     
                                     </form>
                                     <hr />
