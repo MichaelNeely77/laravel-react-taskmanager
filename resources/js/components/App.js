@@ -15,7 +15,7 @@ class App extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderTasks = this.renderTasks.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.getTasks = this.getTasks.bind(this);
+        // this.getTasks = this.getTasks.bind(this);
 
     }
     // handle change
@@ -29,8 +29,10 @@ class App extends Component {
         e.preventDefault();
         axios.post('/tasks', {
             name: this.state.name
-        }).then(response => {
-            // console.log('from handle submit', response);
+
+        })
+        .then(response => {
+            // console.log(response);
             this.setState({
                 tasks: [response.data, ...this.state.tasks],
                 name: ''
@@ -57,13 +59,16 @@ class App extends Component {
     }
 
     getTasks() {
-            axios.get('/tasks').then(response => this.setState({
+            axios.get('/tasks').then(response => 
+                // console.log(response)
+                
+                this.setState({
                 tasks: [...response.data.tasks]
                         })
                     );
                 }
     // Lifecycle method
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getTasks();
     }
 
@@ -91,21 +96,21 @@ class App extends Component {
                                                 value={this.state.name}
                                                 className="form-control" 
                                                 rows="5" 
-                                                maxLength="255"placeholder="Create a new task" 
+                                                maxLength="255" 
+                                                placeholder="Create a new task" 
                                                 required
                                             />
                                         </div>
                                         <button 
                                             type="submit" 
-                                            className="btn  btn-primary">Create Task
+                                            className="btn btn-primary">Create Task
                                         </button>
     
                                     </form>
                                     <hr />
-                                    {this.renderTasks()}
+                                    { this.renderTasks() }
                                 </div>
-    
-                            <div className="card-body">I'm an example component!</div>
+                            
                         </div>
                     </div>
                 </div>

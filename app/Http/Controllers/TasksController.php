@@ -19,7 +19,7 @@ class TasksController extends Controller
     public function index(Request $request, Task $task)
     {
         $allTasks = $task->whereIn('user_id', $request->user())->with('user');
-        $tasks = $allTasks->orderBy('created_at', 'desc')->take(20)->get();
+        $tasks = $allTasks->orderBy('created_at', 'desc')->take(2)->get();
 
         return response()->json([
             'tasks' => $tasks
@@ -51,7 +51,7 @@ class TasksController extends Controller
         ]);
         // create a new task based on user tasks
         $task = $request->user()->tasks()->create([
-            'name' => $request->name,
+            'name' => $request->name
         ]);
         // return task with user object
         return response()->json($task->with('user')->find($task->id));

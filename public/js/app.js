@@ -68998,6 +68998,8 @@ function (_Component) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderTasks = _this.renderTasks.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this)); // this.getTasks = this.getTasks.bind(this);
+
     return _this;
   } // handle change
 
@@ -69018,7 +69020,7 @@ function (_Component) {
       axios.post('/tasks', {
         name: this.state.name
       }).then(function (response) {
-        // console.log('from handle submit', response);
+        // console.log(response);
         _this2.setState({
           tasks: [response.data].concat(_toConsumableArray(_this2.state.tasks)),
           name: ''
@@ -69029,14 +69031,55 @@ function (_Component) {
   }, {
     key: "renderTasks",
     value: function renderTasks() {
+      var _this3 = this;
+
       return this.state.tasks.map(function (task) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: task.id,
           className: "media"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name)));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name, ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this3.handleDelete(task.id);
+          },
+          className: "btn btn-sm btn-warning float-right"
+        }, "Delete"))));
       });
+    }
+  }, {
+    key: "getTasks",
+    value: function getTasks() {
+      var _this4 = this;
+
+      axios.get('/tasks').then(function (response) {
+        return (// console.log(response)
+          _this4.setState({
+            tasks: _toConsumableArray(response.data.tasks)
+          })
+        );
+      });
+    } // Lifecycle method
+
+  }, {
+    key: "UNSAFE_componentWillMount",
+    value: function UNSAFE_componentWillMount() {
+      this.getTasks();
+    }
+  }, {
+    key: "handleDelete",
+    value: function handleDelete(id) {
+      // remove from local state
+      var isNotId = function isNotId(task) {
+        return task.id !== id;
+      };
+
+      var updatedTasks = this.state.tasks.filter(isNotId);
+      this.setState({
+        tasks: updatedTasks
+      }); // make delete request to the backend
+
+      axios["delete"]("/tasks/".concat(id));
     }
   }, {
     key: "render",
@@ -69067,10 +69110,8 @@ function (_Component) {
         required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-        className: "btn  btn-primary"
-      }, "Create Task")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.renderTasks()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, "I'm an example component!")))));
+        className: "btn btn-primary"
+      }, "Create Task")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.renderTasks())))));
     }
   }]);
 
