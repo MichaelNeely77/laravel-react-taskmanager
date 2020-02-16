@@ -73120,7 +73120,9 @@ function (_Component) {
           className: "media"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name, ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "by ", task.user.name, " | ", task.updated_at.split(' ').slice(1).join()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/".concat(task.id, "/edit"),
           className: "btn btn-sm btn-success float-right"
         }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -73128,7 +73130,7 @@ function (_Component) {
             return _this3.handleDelete(task.id);
           },
           className: "btn btn-sm btn-warning float-right"
-        }, "Delete"))));
+        }, "Delete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
       });
     }
   }, {
